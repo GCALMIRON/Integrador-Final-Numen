@@ -1,0 +1,123 @@
+/* Estilos específicos para el botón "Inicio" */
+li.inicio {
+  width:fit-content;
+  padding: 10px 15px; /* Ajusta el padding del botón según tus preferencias */
+  font-size: 16px; /* Ajusta el tamaño del texto según tus preferencias */
+  color: #fff; /* Color del texto del botón */
+  text-decoration: none;
+  border: 1px solid #fff; /* Añade un borde al botón */
+  border-radius: 5px; /* Redondea las esquinas del botón */
+}
+
+.menu-recetas-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color:#c02401;
+  }
+  
+  #receta-form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background-color:#fb9882;
+    /*align-items:center;*/
+  }
+
+  .input {
+    text-align: center;
+  }
+  
+  .receta-form label {
+    margin-bottom: 5px;
+  }
+  
+  .receta-form input,
+  .receta-form textarea {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 16px;
+    width: 100%; /* Añade esta propiedad para que ocupen todo el ancho disponible */
+    
+  }
+  
+  .receta-form button {
+    background-color: #21f428;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .receta-form button:hover {
+    background-color: #45a049;
+  }
+
+  /* Agrega estilos para la lista de recetas */
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra las recetas en el eje horizontal */
+}
+
+/* Estilos para cada elemento de la lista (cada receta) */
+li {
+  width: calc(25% - 20px); /* Establece el ancho de cada receta y añade un margen entre ellas */
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Estilos para los botones de acción (eliminar, modificar) */
+li button {
+  margin-top: 10px;
+  margin: 5px;;
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Efecto de transición al pasar el ratón sobre una receta */
+li:hover {
+  transform: scale(1.05);
+}
+
+/* Estilos para los ingredientes y pasos */
+li p {
+  color: #333; /* Cambia el color del texto de ingredientes y pasos */
+}
+
+.error-container {
+  border: 1px solid #ff0000;
+  background-color: #ffeeee;
+  color: #ff0000;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.broma {
+  display: flex;
+  background: #fb9882;
+  border: 2px solid orange;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  margin: 10px;
+}
+
+.broma > p {
+  text-align: center;
+  font-weight: 600;
+  color: black;
+  margin-left: 15px;
+  margin-right: 15px;
+}

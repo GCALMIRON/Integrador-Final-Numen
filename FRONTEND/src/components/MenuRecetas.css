@@ -9,6 +9,28 @@ li.inicio {
   border-radius: 5px; /* Redondea las esquinas del botón */
 }
 
+.recetasfuera {
+  align-items: center;
+  justify-items: center;
+  max-width: auto;
+  margin: auto;
+  padding: 20px;
+  background-color: #fb9882;
+}
+
+.recetasfuera button {
+  background-color: #07b10d;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.recetasfuera h2 {
+  color: #4f016b;
+}
+
 .menu-recetas-container {
     max-width: 600px;
     margin: auto;
@@ -120,4 +142,27 @@ li p {
   color: black;
   margin-left: 15px;
   margin-right: 15px;
+}
+
+.detalles-receta-table {
+  width: 100%;
+  max-width: 700px;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.detalles-receta-table th, .detalles-receta-table td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+.detalles-receta-table th {
+  background-color: rgb(152, 59, 5);
+  color: white;
+}
+
+.contenedor {
+  display: flex;
+  justify-content: center;
 }

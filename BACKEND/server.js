@@ -3,14 +3,17 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 const recetaRoutes = require('./routes/recetaRoutes');
+const registroAccesoMiddleware = require('./middlewares/registroAccesoMiddleware');
 
 const app = express();
 const port = process.env.PORT;
 
 // Configurar middlewares
 app.use(cors());
+app.use(registroAccesoMiddleware);
 app.use(express.json());
 app.use('/recetas', recetaRoutes);
+
 
 // Ruta de bienvenida
 app.get('/', (req, res) => {
@@ -33,3 +36,5 @@ mongoose.connection.on('error', (err) => {
 app.listen(port, () => {
   console.log(`Servidor escuchando en el puerto ${port}`);
 });
+
+

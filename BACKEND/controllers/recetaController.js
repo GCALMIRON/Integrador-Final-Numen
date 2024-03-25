@@ -1,6 +1,25 @@
 const mongoose = require('mongoose');
 const Receta = require('../models/receta');
 const { validationResult } = require('express-validator')
+const axios = require('axios');
+
+exports.buscarRecetasPorIngrediente = async (req, res) => {
+  const { ingrediente } = req.query;
+
+  try {
+    const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingrediente}`);
+    const data = response.data;
+
+    if (data && data.meals) {
+      res.json(data.meals);
+    } else {
+      res.json ([]);
+    }
+  } catch (error) {
+    console.error('Error al buscar recetas:' , error);
+    res.status(500).json({error: "No se encontraron recetas"});
+  }
+};
 
 exports.obtenerTodasLasRecetas = async (req, res) => {
   try {

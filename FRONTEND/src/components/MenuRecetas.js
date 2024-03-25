@@ -13,6 +13,9 @@ const MenuRecetas = () => {
   const [recetaModificando, setRecetaModificando] = useState(null);
   const [errores, setErrores] = useState([]);
   const [chiste, setChiste] = useState([]);
+  const [ingredientesBusqueda, setIngredientesBusqueda] = useState('');
+  const [recetasEncontradas, setRecetasEncontradas] = useState([]);
+  const [detallesReceta, setDetallesReceta] = useState(null);
 
   // Obtener el chiste de Chuck Norris desde una API externa
   useEffect(() => {
@@ -120,6 +123,42 @@ const MenuRecetas = () => {
     }
   };
 
+  // Buscar recetas en API externa por ingrediente
+
+  const buscarRecetas = async () => {
+    try {
+      const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredientesBusqueda}`);
+      const data = response.data;
+      if (data && data.meals) {
+        setRecetasEncontradas(data.meals);
+      } else {
+        setRecetasEncontradas([]);
+      }
+    } catch (error) {
+      console.error('Error al buscar recetas:', error);
+      // Acá voy a manejar errores de solicitud
+    }
+  };
+
+  // Función para mostrar detalles de la receta seleccionada
+
+  const mostrarDetallesReceta = async (receta) => {
+    try {
+      // Hacer la solicitud al nuevo endpoint para obtener los detalles de la receta por nombre
+      const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${receta.strMeal}`);
+      
+      const data = response.data;
+      if (data && data.meals && data.meals.length > 0) {
+        // Setear los detalles de la receta
+        setDetallesReceta(data.meals[0]);
+      } else {
+        console.error('No se encontraron detalles para la receta:', receta.strMeal);
+      }
+    } catch (error) {
+      console.error('Error al obtener detalles de la receta:', error);
+    }
+  };
+
   return (
     <div>
       <header>
@@ -135,6 +174,63 @@ const MenuRecetas = () => {
           </ul>
         </nav>
       </header>
+
+      {/* Formulario para buscar recetas por ingrediente en api externa*/}
+      <div className="recetasfuera">
+        <h2>¿Te levantaste con poca inspiración?</h2>
+        <h3>Dejanos ayudarte. Buscá recetas nuevas, eligiendo el ingrediente principal.</h3>
+        <h5>Aclaración: la receta y los ingredientes están en inglés. (Ej. Chicken, lamb, potato, etc)</h5>
+        <div><h3>Ingrediente principal:</h3>
+        <input
+            type="text"
+            value={ingredientesBusqueda}
+            onChange={(e) => setIngredientesBusqueda(e.target.value)}
+          />
+          </div>
+          <p></p>
+        <button onClick={buscarRecetas}>Buscar recetas</button>
+      </div>
+
+      {/* Mostrar recetas encontradas */}
+      <div>
+        <h2>Recetas Encontradas</h2>
+        <ul>
+          {recetasEncontradas.map((receta) => (
+            <li key={receta.idMeal} onClick={() => mostrarDetallesReceta(receta)}>
+                <div>
+                  <strong>{receta.strMeal}</strong>
+                {/* Aquí se muestran los detalles de la receta */}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Mostrar detalles de la receta seleccionada */}
+    <div className="contenedor">
+    {detallesReceta && (
+      <div>
+        <h2>Detalles de la Receta</h2>
+        <table className="detalles-receta-table">
+      <tbody>
+        <tr>
+          <th>Nombre:</th>
+          <td>{detallesReceta.strMeal}</td>
+        </tr>
+        <tr>
+          <th>Ingredientes:</th>
+          <td>{detallesReceta.strIngredient1}, {detallesReceta.strIngredient2}, {detallesReceta.strIngredient3}, {detallesReceta.strIngredient4}, {detallesReceta.strIngredient5}, {detallesReceta.strIngredient6}, {detallesReceta.strIngredient7}, {detallesReceta.strIngredient8}, {detallesReceta.strIngredient9}, {detallesReceta.strIngredient10}</td>
+        </tr>
+        <tr>
+          <th>Pasos:</th>
+          <td>{detallesReceta.strInstructions}</td>
+        </tr>
+      </tbody>
+    </table>
+    {/* <button onClick={agregarRecetaEncontrada}>Agregar Receta Encontrada</button> */}
+      </div>
+    )}
+    </div>
 
       {/* Formulario para agregar nueva receta */}
 

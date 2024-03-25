@@ -1,8 +1,10 @@
 const express = require('express');
 const { body, validationResult } = require ('express-validator');
 const recetaController = require('../controllers/recetaController');
-
 const router = express.Router();
+
+router.get("/buscar", recetaController.buscarRecetasPorIngrediente);
+
 
 // Rutas CRUD para recetas
 
